@@ -47,11 +47,7 @@ for i in $(seq 0 $((NUM_EXTRA_REGIONS-1))); do
   EXTRA_REGIONS+=($(jq --raw-output ".extra_regions[${i}]" .tfconfig))
 done
 
-for EXTRA_REGION in "${EXTRA_REGIONS[@]}"; do echo $EXTRA_REGION; done
-
 if [[ $NUM_EXTRA_REGIONS == 0 ]]; then EXTRA_REGIONS=(); fi
-
-for EXTRA_REGION in "${EXTRA_REGIONS[@]}"; do echo $EXTRA_REGION; done
 
 # Get the Terraform configuration information from the AWS secret.
 INFO_JSON=$(aws --profile "${PROFILE}" secretsmanager get-secret-value --secret-id ${SECRET} \
